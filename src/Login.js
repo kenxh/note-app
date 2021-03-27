@@ -15,12 +15,13 @@ const Login = ({ onLogin }) => {
    * updateEmail -> it will pass the value of the target to setEmail
    * updatePassword -> it will pass the value of the target to setPassword
    */
-  const updateEmail = (e) => {};
-  const updatePassword = (e) => {};
+  const updateEmail = (e) => {setEmail(e.target.value)};
+  const updatePassword = (e) => {setPassword(e.target.value)};
 
   const authenticate = (e) => {
     e.preventDefault();
     //TODO: pass the state variables, email and password, to the onLogin function (which was passed down prop from App)
+    onLogin(email, password);
   };
   return (
     <Form onSubmit={authenticate}>
@@ -31,10 +32,10 @@ const Login = ({ onLogin }) => {
              * TODO: pass updateEmail & updatePassword functions to the onChange prop for each respective
              * FormControl component
              */}
-            <FormControl type="email" placeholder="Enter email" />
+            <FormControl type="email" placeholder="Enter email" onChange={updateEmail}/>
           </Col>
           <Col>
-            <FormControl type="password" placeholder="Password" />
+            <FormControl type="password" placeholder="Password" onChange={updatePassword}/>
           </Col>
           <Col>
             <InputGroup.Append>

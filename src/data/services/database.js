@@ -7,6 +7,10 @@ const getAllNotes = (setNotes) => {
     const dto = snapshot.val();
 
     // TODO: if dto is null, pass an empty array to setNotes & return early
+    if (dto == null) {
+      setNotes([]);
+      return setNotes
+    };
 
     // firebase returns an object full of objects, with the unique id as each inner object's key
     // this manipulates that data so each inner object contains this unique id as a property
@@ -33,6 +37,7 @@ const updateNote = (id, note, date) => {
   // TODO: using db.child & chaining on the .update method, finish the code to update a note already in the database
   // this is meant to be challenging, so you'll need to google how to use .update
   // tip: db is already equal to firebase.database.ref("notes")
+  db.child(id).update({ note, date });
 };
 
 /**CHALLENGE: create a function called removeNote that takes in an id and deletes a note in the database

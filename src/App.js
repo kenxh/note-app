@@ -22,6 +22,7 @@ const App = () => {
     fb.auth
       .signInWithEmailAndPassword(email, password)
       .catch((e) => console.log(e));
+    console.log("pizza")
   };
 
   const logout = () => {
@@ -41,6 +42,7 @@ const App = () => {
       // a.k.a if this note already exists in the database & it's being edited
       // TODO: using the "db" variable, call the updateNote function
       // pass it id, note, and a new date object like so: new Date().getTime()
+      db.updateNote(id, note, new Date().getTime())
     } else {
       // a.k.a a completely new note
       const date = new Date().getTime();
@@ -51,21 +53,27 @@ const App = () => {
         // TODO: using the spread operator, call setNotes & pass it an array
         // containing what was already in notes as well as an object containing
         // an id (with the value of the key variable), note and date
+        setNotes([...notes, {id, key, savedNote}])
       } else {
         // a.k.a if this is the first note ever made
         // TODO: pass setNotes an array with a single object, containing the same info
         // as the object described in the if block above
+        setNotes([{id, key, savedNote}])
       }
     }
   };
 
   const addNote = () => {
     // TODO: call saveNote passing in a null id & empty string
+    saveNote(null, "")
   };
 
   useEffect(() => {
     // TODO: check if notes is null. if so, call the getAllNotes method using the variable "db"
     // make sure to pass the setter function for the notes state variable to getAllNotes
+    if (!notes) {
+      db.getAllNotes(setNotes)
+    }
   }, [notes]);
 
   return (
@@ -89,7 +97,8 @@ const App = () => {
                  * pass the value of note, currNoteId, changeEditStatus, edit, saveNote
                  * the disabled prop will turn off editing when the user isn't logged in
                  */
-                <Note date={new Date(date)} disabled={!user} />
+                <Note date={new Date(date)} disabled={!user} id={id} note={note} currNoteId={currNoteId} 
+                changeEditStatus={changeEditStatus} edit={edit} saveNote={saveNote}/>
               ))}
           </div>
           {/**TODO: use the double amperstand (&&) to show a button only if the user variable is not null
@@ -97,6 +106,7 @@ const App = () => {
            * This is the Add Note button :)
            * TIP: there's an example of how to do this on line 85
            */}
+           {user && <Button onClick={addNote}>Add Note</Button>}
         </div>
       </div>
     </div>

@@ -26,6 +26,7 @@ const Note = ({
 
   const save = () => {
     // TODO: call saveNote with id & the currNote state variable
+    saveNote(id, currNote);
   };
 
   const isCurrNote = currNoteId === id;
@@ -39,11 +40,11 @@ const Note = ({
            * pass the editNote function to the onChange prop
            * pass disabled to the disabled prop
            */}
-          <FormControl as="textarea" rows={5} />
+          <FormControl as="textarea" rows={5} defaultValue={note} onChange={editNote} dsiabled={disabled}/>
           <InputGroup.Append>
             {edit && isCurrNote && (
               // TODO: pass the save function to the onClick prop of Button
-              <Button className="save-btn">Save</Button>
+              <Button className="save-btn" onClick={save}>Save</Button>
             )}
           </InputGroup.Append>
         </Form.Group>

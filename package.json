@@ -2,7 +2,7 @@
   "name": "note-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://cssg-edu-team.github.io/note-app",
+  "homepage": "http://kenxh.github.io/note-app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -10,6 +10,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "dotenv": "^6.2.0",
+    "firebase": "^8.3.1",
     "firebase-tools": "^9.6.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
